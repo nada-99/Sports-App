@@ -49,7 +49,7 @@ class NetworkManager : NetworkServicesProtocol{
     
     static func getUpComingEvents(sportName: String, leagueId: Int, completionHandler: @escaping (UpComingRoot?) -> Void) {
 
-        let urlString = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=2023-06-09&to=2024-06-09&APIkey=\(apiKey)"
+        let urlString = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=2023-05-09&to=2024-02-09&APIkey=\(apiKey)"
 
         Alamofire.request(urlString).responseData { response in
             switch response.result {
@@ -70,7 +70,7 @@ class NetworkManager : NetworkServicesProtocol{
     
     static func getLatestEvents(sportName: String, leagueId: Int, completionHandler: @escaping (LatestEventRoot?) -> Void) {
         
-        let urlString = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=2023-06-09&to=2024-06-09&APIkey=\(apiKey)"
+        let urlString = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=2023-04-09&to=2024-02-09&APIkey=\(apiKey)"
 
         Alamofire.request(urlString).responseData { response in
             switch response.result {
@@ -91,7 +91,7 @@ class NetworkManager : NetworkServicesProtocol{
     
     static func getTeams(sportName: String, leagueId: Int, completionHandler: @escaping (TeamsRoot?) -> Void) {
         
-        let urlString = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=2023-06-09&to=2024-06-09&APIkey=\(apiKey)"
+        let urlString = "https://apiv2.allsportsapi.com/\(sportName)/?met=Teams&?met=Leagues&leagueId=\(leagueId)&APIkey=\(apiKey)"
 
         Alamofire.request(urlString).responseData { response in
             switch response.result {

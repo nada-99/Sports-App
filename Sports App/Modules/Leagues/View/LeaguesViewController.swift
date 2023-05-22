@@ -59,6 +59,7 @@ class LeaguesViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         leaguedetails.nameSport = sportName
         leaguedetails.leagueID = leagueList[indexPath.section].league_key
            self.navigationController?.pushViewController(leaguedetails, animated: true)
+        print("sfsdfdfsdf"+(sportName ?? ""))
     }
 
 }

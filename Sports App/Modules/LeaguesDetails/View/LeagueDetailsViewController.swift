@@ -8,66 +8,149 @@
 import UIKit
 
 class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
-    
+
     var nameSport : String?
     var leagueID : Int?
     var upComingList = [UpCommingEvent]()
     var latestEventsList = [LatestEvents]()
     var teamsList = [Teams]()
+    
+    var leagueDetailVM : LeagueDetailsViewModel?
 
-    @IBOutlet weak var upComingCollection: UICollectionView!
-    
-    @IBOutlet weak var lastestCollection: UICollectionView!
-    
-    @IBOutlet weak var teamsCollection: UICollectionView!
+    @IBOutlet weak var leguesCollection: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("id is \(String(describing: leagueID))")
+        leguesCollection.layer.cornerRadius = 40
+        
+        let layout = UICollectionViewCompositionalLayout{index, environment in
+            if index == 0{
+                print("upcoming")
+                return self.drawUpComingSection()
+            }else if index == 1 {
+                print("latest")
+                return self.drawLatestSection()
+                
+            }else{
+                print("teams")
+                return self.drawTeamsSection()
+            }
+        }
+        leguesCollection.setCollectionViewLayout(layout, animated: true)
+        
+        leagueDetailVM = LeagueDetailsViewModel()
+        leagueDetailVM?.getUpccoming(sportName: nameSport!, leagueId: leagueID!)
+        leagueDetailVM?.bindUpComingListToLeagueDetails = { () in
+            DispatchQueue.main.async {
+                self.upComingList = self.leagueDetailVM?.upComingList ?? []
+                self.leguesCollection.reloadData()
+                print("upComing = \(self.upComingList.count)")
+            }
+        }
+        leagueDetailVM?.getLastesEvent(sportName: nameSport!, leagueId: leagueID!)
+        leagueDetailVM?.bindLatestEventListToLeagueDetails = { () in
+            DispatchQueue.main.async {
+                self.latestEventsList = self.leagueDetailVM?.latestEventsList ?? []
+                self.leguesCollection.reloadData()
+                print("latest = \(self.latestEventsList.count)")
+            }
+        }
+        leagueDetailVM?.getTeams(sportName: nameSport!, leagueId: leagueID!)
+        leagueDetailVM?.bindTeamsListToLeagueDetails = { () in
+            DispatchQueue.main.async {
+                self.teamsList = self.leagueDetailVM?.teamsList ?? []
+                self.leguesCollection.reloadData()
+                print("teams = \(self.teamsList.count)")
+            }
+        }
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func drawUpComingSection() -> NSCollectionLayoutSection{
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension:  .absolute(130))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 32)
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 16, trailing: 0)
         
-        let leagueDetailVM = LeagueDetailsViewModel()
+        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            items.forEach { item in
+                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
+                let minScale: CGFloat = 0.8
+                let maxScale: CGFloat = 1.0
+                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                item.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
+        }
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(30)) // Set the header size
+        let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
-        leagueDetailVM.getUpccoming(sportName: nameSport!, leagueId: leagueID!)
-        leagueDetailVM.bindUpComingListToLeagueDetails = { () in
-            DispatchQueue.main.async {
-                self.upComingList = leagueDetailVM.upComingList ?? []
-                self.upComingCollection.reloadData()
+        section.boundarySupplementaryItems = [headerSupplementary]
+        
+        return section
+    }
+    func drawLatestSection() -> NSCollectionLayoutSection{
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension:  .absolute(140))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 16)
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 16, trailing: 0)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(30))
+        let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
+        section.boundarySupplementaryItems = [headerSupplementary]
+        return section
+        
+    }
+    func drawTeamsSection() -> NSCollectionLayoutSection{
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension:  .absolute(140))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 32)
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 16, trailing: 0)
+        
+        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            items.forEach { item in
+                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
+                let minScale: CGFloat = 0.8
+                let maxScale: CGFloat = 1.0
+                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                item.transform = CGAffineTransform(scaleX: scale, y: scale)
             }
         }
-        leagueDetailVM.getLastesEvent(sportName: nameSport!, leagueId: leagueID!)
-        leagueDetailVM.bindLatestEventListToLeagueDetails = { () in
-            DispatchQueue.main.async {
-                self.latestEventsList = leagueDetailVM.latestEventsList ?? []
-                self.lastestCollection.reloadData()
-            }
-        }
-        leagueDetailVM.getTeams(sportName: nameSport!, leagueId: leagueID!)
-        leagueDetailVM.bindTeamsListToLeagueDetails = { () in
-            DispatchQueue.main.async {
-                self.teamsList = leagueDetailVM.teamsList ?? []
-                self.teamsCollection.reloadData()
-            }
-        }
-        //checkIfThereIsNoEvents()
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(25))
+        let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
+        section.boundarySupplementaryItems = [headerSupplementary]
+        return section
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if collectionView == self.upComingCollection {
+        if section == 0 {
             return upComingList.count
-        }else if collectionView == self.lastestCollection{
+        }else if section == 1 {
             return latestEventsList.count
+        }else{
+            return teamsList.count
         }
-        return teamsList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.upComingCollection {
+        if indexPath.section == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upComingCell", for: indexPath) as! UpComingCell
             let upComing = upComingList[indexPath.row]
             let url = URL(string: upComing.home_team_logo ?? "")
@@ -78,7 +161,8 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
             cell.awayTeamTitle.text = upComing.event_away_team
             cell.dateLabel.text = upComing.event_date
             cell.timeLabel.text = upComing.event_time
-        }else if collectionView == self.lastestCollection{
+            return cell
+        }else if indexPath.section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "lastestCell", for: indexPath) as! LastestEventsCell
             let lastEvent = latestEventsList[indexPath.row]
             let url = URL(string: lastEvent.home_team_logo ?? "")
@@ -90,14 +174,46 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
             cell.dateLabel.text = lastEvent.event_date
             cell.timeLabel.text = lastEvent.event_time
             cell.finalResult.text = lastEvent.event_final_result
+            return cell
+        }else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamsCell", for: indexPath) as! TeamCollectionViewCell
+            let team = teamsList[indexPath.row]
+            let url = URL(string: team.team_logo ?? "")
+            cell.teamImg?.kf.setImage(with: url , placeholder: UIImage(named: "cub"))
+            cell.teamTitle.text = team.team_name
+            return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamsCell", for: indexPath) as! TeamsCell
-        let team = teamsList[indexPath.row]
-        let url = URL(string: team.team_logo ?? "")
-        cell.teamImg?.kf.setImage(with: url , placeholder: UIImage(named: "cub"))
-        cell.teamName.text = team.team_name
-        return cell
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if  upComingList.count == 0 && latestEventsList.count == 0 {
+//            collectionDetails.isHidden = true
+//            imgNoItems.isHidden = false
+            print("no data")
+        }else{
+//            imgNoItems.isHidden = true
+//            collectionDetails.isHidden = false
+            print("hii data")
+        }
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeader", for: indexPath) as! HeaderCollectionReusableView
+            
+            if indexPath.section == 0 {
+                
+                header.sectionHeader.text = "Up Coming Events"
+            }else if indexPath.section == 1{
+                header.sectionHeader.text = "Latest Results"
+            }else{
+                header.sectionHeader.text = "Teams"
+            }
+            
+            return header
+        }
+        return UICollectionReusableView()
+    }
 
 }
