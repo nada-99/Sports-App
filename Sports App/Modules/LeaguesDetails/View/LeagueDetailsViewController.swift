@@ -16,7 +16,11 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
     var teamsList = [Teams]()
     
     var leagueDetailVM : LeagueDetailsViewModel?
+    var localLeague : LocalLeague!
+    var img = UIImage(systemName: "heart")
+    var isFavorite = false
 
+    @IBOutlet weak var favBtn: UIButton!
     @IBOutlet weak var leguesCollection: UICollectionView!
     
     override func viewDidLoad() {
@@ -40,7 +44,8 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
         }
         leguesCollection.setCollectionViewLayout(layout, animated: true)
         
-        leagueDetailVM = LeagueDetailsViewModel()
+        leagueDetailVM = LeagueDetailsViewModel(sport: nameSport!, leagueId: leagueID!, coreData: CoreDataManagement())
+        
         leagueDetailVM?.getUpccoming(sportName: nameSport!, leagueId: leagueID!)
         leagueDetailVM?.bindUpComingListToLeagueDetails = { () in
             DispatchQueue.main.async {
@@ -66,6 +71,20 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
             }
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        favBtn.setImage(img, for: .normal)
+        if  img == UIImage(systemName: "heart") {
+            let isFav =  leagueDetailVM?.getSelectedLeague(name: localLeague.name!, id: localLeague.id!)
+            if isFav == nil {
+                favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
+                isFavorite = false
+            }else{
+                favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                isFavorite = true
+            }
+        }
     }
     
     func drawUpComingSection() -> NSCollectionLayoutSection{
@@ -224,5 +243,51 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
             print(teamsList[indexPath.row].team_key)
         }
     }
-
+    
+    
+    @IBAction func addToFav(_ sender: Any) {
+        
+//        if favBtn.image == UIImage(systemName: "heart") {
+//            
+//            let img = UIImage(systemName: "heart.fill")
+//            leagueDetailVM?.addToFav(localLeague: localLeague)
+//            favBtn.image = img
+//        }else{
+//            
+//            let alert : UIAlertController = UIAlertController(title: "Delete League", message: "ARE YOU SURE TO DELETE?", preferredStyle: .alert)
+//            
+//            alert.addAction(UIAlertAction(title: "YES", style: .default,handler: { [weak self] action in
+//                print("delete begin")
+//                print("heart fill")
+//                let img = UIImage(systemName: "heart")
+//                self?.favBtn.image = img
+//                self?.leagueDetailVM?.deleteLeague(name: self?.localLeague.name ?? "", id: (self?.localLeague.id ?? 0))
+//                
+//            }))
+//            alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+        
+        isFavorite = !isFavorite
+        
+        if isFavorite {
+            let img = UIImage(systemName: "heart.fill")
+            leagueDetailVM?.addToFav(localLeague: localLeague)
+            favBtn.setImage(img, for: .normal)
+        } else {
+            let alert : UIAlertController = UIAlertController(title: "Delete League", message: "ARE YOU SURE TO DELETE?", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "YES", style: .default,handler: { [weak self] action in
+                print("delete begin")
+                print("heart fill")
+                let img = UIImage(systemName: "heart")
+                self?.favBtn.setImage(img, for: .normal)
+                self?.leagueDetailVM?.deleteLeague(name: self?.localLeague.name ?? "", id: (self?.localLeague.id ?? 0))
+                
+            }))
+            alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
 }

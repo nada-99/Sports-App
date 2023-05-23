@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		018737622A1CFF0A002ED290 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018737612A1CFF0A002ED290 /* TeamTableViewCell.swift */; };
+		018737692A1D15E9002ED290 /* Sports App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 018737672A1D15E9002ED290 /* Sports App.xcdatamodeld */; };
+		0187376B2A1D1947002ED290 /* CoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187376A2A1D1947002ED290 /* CoreDataManagement.swift */; };
+		018737702A1D20EE002ED290 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187376F2A1D20EE002ED290 /* FavoriteViewController.swift */; };
+		018737722A1D2180002ED290 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018737712A1D2180002ED290 /* FavoriteViewModel.swift */; };
 		018C6C372A1C1B2E009DA316 /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C6C362A1C1B2E009DA316 /* TeamCollectionViewCell.swift */; };
 		018C6C392A1C2454009DA316 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C6C382A1C2454009DA316 /* HeaderCollectionReusableView.swift */; };
 		0190773A2A1ABD370093EAD8 /* SportsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019077392A1ABD370093EAD8 /* SportsCollectionViewCell.swift */; };
@@ -37,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		018737612A1CFF0A002ED290 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
+		018737682A1D15E9002ED290 /* Sports App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Sports App.xcdatamodel"; sourceTree = "<group>"; };
+		0187376A2A1D1947002ED290 /* CoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagement.swift; sourceTree = "<group>"; };
+		0187376F2A1D20EE002ED290 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		018737712A1D2180002ED290 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		018C6C362A1C1B2E009DA316 /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
 		018C6C382A1C2454009DA316 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		019077392A1ABD370093EAD8 /* SportsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -80,9 +88,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		018737632A1D121E002ED290 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0187376A2A1D1947002ED290 /* CoreDataManagement.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		0187376C2A1D1E6D002ED290 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				0187376E2A1D1E85002ED290 /* ViewModel */,
+				0187376D2A1D1E76002ED290 /* View */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		0187376D2A1D1E76002ED290 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0187376F2A1D20EE002ED290 /* FavoriteViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0187376E2A1D1E85002ED290 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				018737712A1D2180002ED290 /* FavoriteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		019077332A1AAC830093EAD8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0187376C2A1D1E6D002ED290 /* Favorite */,
 				01A9EC032A1C3E5D00330BC4 /* Teams */,
 				0190774D2A1AE7C60093EAD8 /* LeaguesDetails */,
 				0190773D2A1AC9ED0093EAD8 /* Leagues */,
@@ -104,6 +146,7 @@
 		019077362A1AACBA0093EAD8 /* Servies */ = {
 			isa = PBXGroup;
 			children = (
+				018737632A1D121E002ED290 /* CoreData */,
 				019077422A1ACA4A0093EAD8 /* Networking */,
 			);
 			path = Servies;
@@ -221,6 +264,7 @@
 				019BE1482A1A8EDC00261293 /* SceneDelegate.swift */,
 				019BE14F2A1A8EDE00261293 /* Assets.xcassets */,
 				019BE1542A1A8EDE00261293 /* Info.plist */,
+				018737672A1D15E9002ED290 /* Sports App.xcdatamodeld */,
 			);
 			path = "Sports App";
 			sourceTree = "<group>";
@@ -388,14 +432,17 @@
 				0190775A2A1AF64A0093EAD8 /* LeagueDetailsViewModel.swift in Sources */,
 				019BE1472A1A8EDC00261293 /* AppDelegate.swift in Sources */,
 				019077602A1AF71C0093EAD8 /* TeamsCell.swift in Sources */,
+				0187376B2A1D1947002ED290 /* CoreDataManagement.swift in Sources */,
 				019077552A1AF30E0093EAD8 /* LastestEvents.swift in Sources */,
 				0190773C2A1AC0DD0093EAD8 /* SportsViewController.swift in Sources */,
 				0190774C2A1AD6850093EAD8 /* LeaguesCustomCell.swift in Sources */,
 				0190775E2A1AF7080093EAD8 /* LastestEventsCell.swift in Sources */,
 				01A9EC062A1C3F0E00330BC4 /* TeamViewController.swift in Sources */,
 				018737622A1CFF0A002ED290 /* TeamTableViewCell.swift in Sources */,
+				018737722A1D2180002ED290 /* FavoriteViewModel.swift in Sources */,
 				018C6C372A1C1B2E009DA316 /* TeamCollectionViewCell.swift in Sources */,
 				019077512A1AE8170093EAD8 /* LeagueDetailsViewController.swift in Sources */,
+				018737702A1D20EE002ED290 /* FavoriteViewController.swift in Sources */,
 				019077582A1AF3320093EAD8 /* Teams.swift in Sources */,
 				018C6C392A1C2454009DA316 /* HeaderCollectionReusableView.swift in Sources */,
 				0190775C2A1AF6EE0093EAD8 /* UpComingCell.swift in Sources */,
@@ -403,6 +450,7 @@
 				019077462A1ACA790093EAD8 /* Leagues.swift in Sources */,
 				019BE1492A1A8EDC00261293 /* SceneDelegate.swift in Sources */,
 				019077412A1ACA3C0093EAD8 /* LeaguesViewModel.swift in Sources */,
+				018737692A1D15E9002ED290 /* Sports App.xcdatamodeld in Sources */,
 				0190773A2A1ABD370093EAD8 /* SportsCollectionViewCell.swift in Sources */,
 				01A9EC092A1C426600330BC4 /* TeamViewModel.swift in Sources */,
 			);
@@ -622,6 +670,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		018737672A1D15E9002ED290 /* Sports App.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				018737682A1D15E9002ED290 /* Sports App.xcdatamodel */,
+			);
+			currentVersion = 018737682A1D15E9002ED290 /* Sports App.xcdatamodel */;
+			path = "Sports App.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 019BE13B2A1A8EDC00261293 /* Project object */;
 }

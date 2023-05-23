@@ -19,3 +19,10 @@ class LeagueRoot : Decodable {
     var result : [League]
     var success : Int?
 }
+
+struct LocalLeague{
+    var id : Int?
+    var name : String?
+    var logo : String?
+    var sport : String?
+}
