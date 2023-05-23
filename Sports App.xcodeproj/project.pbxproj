@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		018737622A1CFF0A002ED290 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018737612A1CFF0A002ED290 /* TeamTableViewCell.swift */; };
 		018C6C372A1C1B2E009DA316 /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C6C362A1C1B2E009DA316 /* TeamCollectionViewCell.swift */; };
 		018C6C392A1C2454009DA316 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C6C382A1C2454009DA316 /* HeaderCollectionReusableView.swift */; };
 		0190773A2A1ABD370093EAD8 /* SportsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019077392A1ABD370093EAD8 /* SportsCollectionViewCell.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		018737612A1CFF0A002ED290 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		018C6C362A1C1B2E009DA316 /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
 		018C6C382A1C2454009DA316 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		019077392A1ABD370093EAD8 /* SportsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				01A9EC052A1C3F0E00330BC4 /* TeamViewController.swift */,
+				018737612A1CFF0A002ED290 /* TeamTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				0190774C2A1AD6850093EAD8 /* LeaguesCustomCell.swift in Sources */,
 				0190775E2A1AF7080093EAD8 /* LastestEventsCell.swift in Sources */,
 				01A9EC062A1C3F0E00330BC4 /* TeamViewController.swift in Sources */,
+				018737622A1CFF0A002ED290 /* TeamTableViewCell.swift in Sources */,
 				018C6C372A1C1B2E009DA316 /* TeamCollectionViewCell.swift in Sources */,
 				019077512A1AE8170093EAD8 /* LeagueDetailsViewController.swift in Sources */,
 				019077582A1AF3320093EAD8 /* Teams.swift in Sources */,

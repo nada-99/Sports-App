@@ -215,5 +215,14 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
         }
         return UICollectionReusableView()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 2{
+            let teamDetails = self.storyboard?.instantiateViewController(withIdentifier: "teamDetails") as! TeamViewController
+            teamDetails.teamKey = teamsList[indexPath.row].team_key
+            self.navigationController?.pushViewController(teamDetails, animated: true)
+            print(teamsList[indexPath.row].team_key)
+        }
+    }
 
 }
