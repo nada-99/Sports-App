@@ -246,28 +246,7 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
     
     
     @IBAction func addToFav(_ sender: Any) {
-        
-//        if favBtn.image == UIImage(systemName: "heart") {
-//            
-//            let img = UIImage(systemName: "heart.fill")
-//            leagueDetailVM?.addToFav(localLeague: localLeague)
-//            favBtn.image = img
-//        }else{
-//            
-//            let alert : UIAlertController = UIAlertController(title: "Delete League", message: "ARE YOU SURE TO DELETE?", preferredStyle: .alert)
-//            
-//            alert.addAction(UIAlertAction(title: "YES", style: .default,handler: { [weak self] action in
-//                print("delete begin")
-//                print("heart fill")
-//                let img = UIImage(systemName: "heart")
-//                self?.favBtn.image = img
-//                self?.leagueDetailVM?.deleteLeague(name: self?.localLeague.name ?? "", id: (self?.localLeague.id ?? 0))
-//                
-//            }))
-//            alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-        
+                
         isFavorite = !isFavorite
         
         if isFavorite {
@@ -275,19 +254,24 @@ class LeagueDetailsViewController: UIViewController , UICollectionViewDelegate ,
             leagueDetailVM?.addToFav(localLeague: localLeague)
             favBtn.setImage(img, for: .normal)
         } else {
-            let alert : UIAlertController = UIAlertController(title: "Delete League", message: "ARE YOU SURE TO DELETE?", preferredStyle: .alert)
+            let alert : UIAlertController = UIAlertController(title: "Delete League", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "YES", style: .default,handler: { [weak self] action in
-                print("delete begin")
-                print("heart fill")
+            alert.addAction(UIAlertAction(title: "Yes", style: .default,handler: { [weak self] action in
                 let img = UIImage(systemName: "heart")
                 self?.favBtn.setImage(img, for: .normal)
                 self?.leagueDetailVM?.deleteLeague(name: self?.localLeague.name ?? "", id: (self?.localLeague.id ?? 0))
                 
             }))
-            alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel,handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "No Internet Connection", message: "Please check your internet connection and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
 }

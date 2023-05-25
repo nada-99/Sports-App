@@ -77,26 +77,36 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let leaguedetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
-        leaguedetails.nameSport = leagueList[indexPath.section].sport
-        leaguedetails.leagueID = leagueList[indexPath.section].id
-        leaguedetails.localLeague = LocalLeague(id: leagueList[indexPath.section].id , name: leagueList[indexPath.section].name , sport: sportName)
-           self.navigationController?.pushViewController(leaguedetails, animated: true)
+        if !CheckInternetConnection.isInternetAvailable(){
+            showAlert()
+        }else{
+            let leaguedetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
+            leaguedetails.nameSport = leagueList[indexPath.section].sport
+            leaguedetails.leagueID = leagueList[indexPath.section].id
+            leaguedetails.localLeague = LocalLeague(id: leagueList[indexPath.section].id , name: leagueList[indexPath.section].name , sport: sportName)
+            self.navigationController?.pushViewController(leaguedetails, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        let alert : UIAlertController = UIAlertController(title: "Delete League", message: "ARE YOU SURE TO DELETE?", preferredStyle: .alert)
+        let alert : UIAlertController = UIAlertController(title: "Delete League", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "YES", style: .default,handler: { [weak self] action in
+        alert.addAction(UIAlertAction(title: "Yes", style: .default,handler: { [weak self] action in
             
             self?.favViewModel?.deleteLeague(name: self?.leagueList[indexPath.section].name ?? "", id: self?.leagueList[indexPath.section].id ?? 0)
             self?.leagueList.remove(at: indexPath.section)
             self?.leaguesTable.reloadData()
             
         }))
-        alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel,handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
+    func showAlert() {
+        let alert = UIAlertController(title: "No Internet Connection", message: "Please check your internet connection and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }

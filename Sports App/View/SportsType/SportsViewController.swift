@@ -42,8 +42,19 @@ class SportsViewController: UIViewController ,UICollectionViewDataSource, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let leagueViewController = self.storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesViewController
-        leagueViewController.sportName = sportsArray[indexPath.row].lowercased()
-            self.navigationController?.pushViewController(leagueViewController, animated: true)
+        if !CheckInternetConnection.isInternetAvailable(){
+            showAlert()
+        }else{
+            let leagueViewController = self.storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesViewController
+            leagueViewController.sportName = sportsArray[indexPath.row].lowercased()
+                self.navigationController?.pushViewController(leagueViewController, animated: true)
+        }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "No Internet Connection", message: "Please check your internet connection and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 }
