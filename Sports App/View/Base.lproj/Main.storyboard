@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0OS-21-hQu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lnW-GC-H6f">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -556,10 +556,29 @@
             </objects>
             <point key="canvasLocation" x="1104.5801526717557" y="313.38028169014086"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="RVc-q5-em7">
+            <objects>
+                <viewController id="lnW-GC-H6f" customClass="SplashViewController" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bOZ-Wy-DlS">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dgz-GU-TLQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <segue destination="0OS-21-hQu" kind="presentation" identifier="homePage" modalPresentationStyle="fullScreen" id="6Hj-WA-YOI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="axi-SI-xXL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1715" y="5"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="nus-AY-gif">
             <objects>
                 <navigationController id="0OS-21-hQu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="qux-Kp-3DF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xgH-ni-Sto">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

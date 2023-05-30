@@ -58,7 +58,7 @@ class LeaguesViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         let leaguedetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
         leaguedetails.nameSport = sportName
         leaguedetails.leagueID = leagueList[indexPath.section].league_key
-        leaguedetails.localLeague = LocalLeague(id: leagueList[indexPath.section].league_key , name: leagueList[indexPath.section].league_name , sport: sportName)
+        leaguedetails.localLeague = LocalLeague(id: leagueList[indexPath.section].league_key , name: leagueList[indexPath.section].league_name , logo: leagueList[indexPath.section].league_logo, sport: sportName)
         self.navigationController?.pushViewController(leaguedetails, animated: true)
         
         print("sfsdfdfsdf"+(sportName ?? ""))

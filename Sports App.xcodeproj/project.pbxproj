@@ -35,6 +35,8 @@
 		0196CB3C2A26769D0023DE30 /* MockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0196CB3B2A26769D0023DE30 /* MockNetwork.swift */; };
 		0196CB3F2A2689E70023DE30 /* FakeLocalSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0196CB3E2A2689E70023DE30 /* FakeLocalSource.swift */; };
 		0196CB412A26946D0023DE30 /* FavoriteViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0196CB402A26946D0023DE30 /* FavoriteViewModelTest.swift */; };
+		0196CB442A26A6070023DE30 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0196CB432A26A6070023DE30 /* SplashViewController.swift */; };
+		0196CB462A26A7750023DE30 /* balls.json in Resources */ = {isa = PBXBuildFile; fileRef = 0196CB452A26A7750023DE30 /* balls.json */; };
 		019BE1472A1A8EDC00261293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BE1462A1A8EDC00261293 /* AppDelegate.swift */; };
 		019BE1492A1A8EDC00261293 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BE1482A1A8EDC00261293 /* SceneDelegate.swift */; };
 		019BE14E2A1A8EDC00261293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 019BE14C2A1A8EDC00261293 /* Main.storyboard */; };
@@ -86,6 +88,8 @@
 		0196CB3B2A26769D0023DE30 /* MockNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwork.swift; sourceTree = "<group>"; };
 		0196CB3E2A2689E70023DE30 /* FakeLocalSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLocalSource.swift; sourceTree = "<group>"; };
 		0196CB402A26946D0023DE30 /* FavoriteViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModelTest.swift; sourceTree = "<group>"; };
+		0196CB432A26A6070023DE30 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		0196CB452A26A7750023DE30 /* balls.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = balls.json; sourceTree = "<group>"; };
 		019BE1432A1A8EDC00261293 /* Sports App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sports App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		019BE1462A1A8EDC00261293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		019BE1482A1A8EDC00261293 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 		019077372A1AACCC0093EAD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0196CB422A26A5E70023DE30 /* Splash */,
 				019077382A1ABCFF0093EAD8 /* SportsType */,
 				019BE14C2A1A8EDC00261293 /* Main.storyboard */,
 				019BE1512A1A8EDE00261293 /* LaunchScreen.storyboard */,
@@ -302,6 +307,15 @@
 				0196CB402A26946D0023DE30 /* FavoriteViewModelTest.swift */,
 			);
 			path = LocalSource;
+			sourceTree = "<group>";
+		};
+		0196CB422A26A5E70023DE30 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				0196CB452A26A7750023DE30 /* balls.json */,
+				0196CB432A26A6070023DE30 /* SplashViewController.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		019BE13A2A1A8EDC00261293 = {
@@ -482,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0196CB462A26A7750023DE30 /* balls.json in Resources */,
 				019BE1532A1A8EDE00261293 /* LaunchScreen.storyboard in Resources */,
 				019BE1502A1A8EDE00261293 /* Assets.xcassets in Resources */,
 				019BE14E2A1A8EDC00261293 /* Main.storyboard in Resources */,
@@ -569,6 +584,7 @@
 				018737702A1D20EE002ED290 /* FavoriteViewController.swift in Sources */,
 				019077582A1AF3320093EAD8 /* Teams.swift in Sources */,
 				018C6C392A1C2454009DA316 /* HeaderCollectionReusableView.swift in Sources */,
+				0196CB442A26A6070023DE30 /* SplashViewController.swift in Sources */,
 				0190775C2A1AF6EE0093EAD8 /* UpComingCell.swift in Sources */,
 				019077482A1AD5550093EAD8 /* LeaguesViewController.swift in Sources */,
 				019077462A1ACA790093EAD8 /* Leagues.swift in Sources */,
