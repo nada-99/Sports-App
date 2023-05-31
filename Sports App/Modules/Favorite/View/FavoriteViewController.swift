@@ -20,6 +20,16 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
         
         self.navigationItem.title = "Favorites"
+        
+        let noFavImg = UIImageView()
+        noFavImg.image = UIImage(named: "noFav")
+        noFavImg.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(noFavImg)
+        noFavImg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        noFavImg.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        noFavImg.widthAnchor.constraint(equalToConstant: self.view.frame.width / 2).isActive = true
+        noFavImg.heightAnchor.constraint(equalToConstant: self.view.frame.width / 2).isActive = true
+
 
         favViewModel = FavoriteViewModel(coreDataProtocol: CoreDataManagement())
         
@@ -28,24 +38,15 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
             DispatchQueue.main.async {
                 self.leagueList = self.favViewModel?.leagues ?? []
                 self.leaguesTable.reloadData()
+                if self.leagueList.count == 0{
+                    noFavImg.isHidden = false
+                    self.leaguesTable.isHidden = true
+                }else{
+                    noFavImg.isHidden = true
+                    self.leaguesTable.isHidden = false
+                }
             }
         }
-        /*favViewModel?.refreshFavouriteLeagues = {
-            [weak self] in
-            DispatchQueue.main.async {
-                self?.leagueList = self?.favViewModel?.leagues ?? []
-                self?.leaguesTable.reloadData()
-//                if self?.leagues.count == 0{
-//                    //imgNoItems.isHidden = false
-//
-//                    self?.leaguesTable.isHidden = true
-//                }else{
-//                    imgNoItems.isHidden = true
-//                    self?.leaguesTable.isHidden = false
-//                }
-            }
-        }*/
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
