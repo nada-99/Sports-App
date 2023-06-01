@@ -85,7 +85,9 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
             leaguedetails.nameSport = leagueList[indexPath.section].sport
             leaguedetails.leagueID = leagueList[indexPath.section].id
             leaguedetails.localLeague = LocalLeague(id: leagueList[indexPath.section].id , name: leagueList[indexPath.section].name , sport: sportName)
-            self.navigationController?.pushViewController(leaguedetails, animated: true)
+            //self.navigationController?.pushViewController(leaguedetails, animated: true)
+            leaguedetails.modalPresentationStyle = .fullScreen
+            present(leaguedetails, animated: true)
         }
     }
     

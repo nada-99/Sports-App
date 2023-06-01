@@ -55,7 +55,7 @@ class TeamViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         let player = playersList[indexPath.section]
         cell.memberName.text = player.player_name
         let url = URL(string: player.player_image ?? "")
-        cell.memberImg?.kf.setImage(with: url , placeholder: UIImage(named: "cub"))
+        cell.memberImg?.kf.setImage(with: url , placeholder: UIImage(named: "member"))
         
         return cell
     }
@@ -64,4 +64,7 @@ class TeamViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         return 80
     }
 
+    @IBAction func backBtn(_ sender: Any) {
+        dismiss(animated: true)
+    }
 }

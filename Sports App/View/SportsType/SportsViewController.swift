@@ -47,7 +47,7 @@ class SportsViewController: UIViewController ,UICollectionViewDataSource, UIColl
         }else{
             let leagueViewController = self.storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesViewController
             leagueViewController.sportName = sportsArray[indexPath.row].lowercased()
-                self.navigationController?.pushViewController(leagueViewController, animated: true)
+            self.navigationController?.pushViewController(leagueViewController, animated: true)
         }
     }
     
